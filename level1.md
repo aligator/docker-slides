@@ -4,9 +4,6 @@
 * First Hello container
 * Basic Wording
 * First Dockerfile
-  * FROM
-  * COPY
-  * ENTRYPOINT
 * First Compose file
 * Volumes
 * Bind mounts
@@ -162,7 +159,7 @@ docker run -p 3000:3000 my-server
   * `python:3.11` - Python
   * `nginx:alpine` - Web server
   * `ubuntu:22.04` - Ubuntu
-- Always use specific versions
+- Always use specific versions (default is `:latest`)
 - Prefer smaller images (alpine)
 
 ---
@@ -170,7 +167,7 @@ docker run -p 3000:3000 my-server
 ## First Dockerfile
 ### WORKDIR
 
-- Sets working directory
+- Sets working directory (e.g. a `cd`)
 - Creates directory if not exists
 - All following commands run here
 - Relative paths are relative to WORKDIR
@@ -186,7 +183,7 @@ docker run -p 3000:3000 my-server
   * Source (relative to build context)
   * Destination (relative to WORKDIR)
 - Can copy multiple files
-- Can use wildcards
+- Can use wildcards (`*.js`)
 - Preserves file permissions
 
 ---
@@ -195,10 +192,10 @@ docker run -p 3000:3000 my-server
 ### EXPOSE
 
 - Documents which ports container uses
-- Doesn't actually publish ports
+- **Doesn't actually publish ports**
 - Just documentation
 - Helps other developers
-- Used with `-p` in `docker run`
+- Use with `-p3000:3000` in `docker run` to actually export the ports
 
 ---
 
@@ -212,3 +209,42 @@ docker run -p 3000:3000 my-server
   * Shell form: `CMD node server.js`
   * Exec form: `CMD ["node", "server.js"]`
 - Prefer exec form
+
+---
+
+## First Compose File
+
+Why Compose?
+- Manage multiple containers
+- Define networks
+- Share volumes
+- Set environment variables
+- One command to start/stop
+
+---
+
+## First Compose File
+
+Example `docker-compose.yaml` / `compose.yaml`:
+```yaml
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+
+    # optionally:
+    volumes:
+      - .:/app
+    environment:
+      - NODE_ENV=development
+```
+
+---
+
+Run with:
+```bash
+docker compose up
+docker compose down
+```
+
