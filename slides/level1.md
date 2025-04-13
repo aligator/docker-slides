@@ -5,8 +5,8 @@
 * Basic Wording
 * First Dockerfile
 * First Compose file
-* Volumes
-* Bind mounts
+* Common docker / compose commands
+* Final Exercise: Dockerize a Web App
 
 ---
 
@@ -61,9 +61,9 @@ docker run hello-world
 ## Basic Concepts
 ### Image
 
-Try:
-`docker image ls`
-`docker image inspect hello-world`
+Try:  
+* `docker image ls`  
+* `docker image inspect hello-world`  
 
 ---
 
@@ -134,7 +134,8 @@ FROM node:22
 WORKDIR /app
 COPY server.js .
 EXPOSE 3000
-CMD ["node", "server.js"]
+ENTRYPOINT ["node"]
+CMD ["server.js"]
 ```
 
 ---
@@ -200,14 +201,27 @@ docker run -p 3000:3000 my-server
 ---
 
 ## First Dockerfile
+### ENTRYPOINT
+
+- Main binary to run
+- Only one ENTRYPOINT per Dockerfile
+- Can be overridden at runtime
+- Two forms:
+  * Shell form: `ENTRYPOINT node`
+  * Exec form: `ENTRYPOINT ["node"]`
+- Prefer exec form
+
+---
+
+## First Dockerfile
 ### CMD
 
-- Default command to run
+- Added as "parameters" to the `ENTRYPOINT`
 - Only one CMD per Dockerfile
 - Can be overridden at runtime
 - Two forms:
-  * Shell form: `CMD node server.js`
-  * Exec form: `CMD ["node", "server.js"]`
+  * Shell form: `CMD server.js`
+  * Exec form: `CMD ["server.js"]`
 - Prefer exec form
 
 ---
@@ -242,9 +256,208 @@ services:
 
 ---
 
+## First Compose File
+
 Run with:
 ```bash
 docker compose up
 docker compose down
 ```
+
+---
+
+## Compose YAML Explained
+### Services
+```yaml
+services:
+  web:
+```
+- Top-level key for container definitions
+- `web` is the service name
+- Can have multiple services (e.g., `db`, `redis`)
+
+---
+
+## Compose YAML Explained
+### Build
+```yaml
+    build: .
+```
+- Builds image from Dockerfile
+- `.` is the build context
+- Can use pre-built images with `image: name`
+
+---
+
+## Compose YAML Explained
+### Ports
+```yaml
+    ports:
+      - "3000:3000"
+```
+- Maps host:container ports
+- Left: **host** port
+- Right: **container** port
+- Can use ranges: `"3000-3005:3000-3005"`
+
+---
+
+## Compose YAML Explained
+### Volumes
+```yaml
+    volumes:
+      - .:/app
+```
+- Mounts host directories
+- Left: **host*** path
+- Right: **container** path
+- Can be named volumes too (more later)
+
+---
+
+## Compose YAML Explained
+### Environment
+```yaml
+    environment:
+      - NODE_ENV=development
+```
+- Sets environment variables
+- Can instead use `.env` file `env_file: "my.env"`
+- Can use `${VAR}` syntax
+
+---
+
+## Common docker / compose commands
+### Docker Images
+
+* List images
+  ```bash
+  docker image ls
+  ```
+* Build image
+  ```bash
+  docker build -t my-image .
+  ```
+* Remove image
+  ```bash
+  docker image rm my-image
+  ```
+
+---
+
+## Common docker / compose commands
+### Docker Containers
+
+* List containers
+  ```bash
+  docker container ls -a
+  ```
+* Run container
+  ```bash
+  docker run -d -p 3000:3000 my-image
+  ```
+* Stop container
+  ```bash
+  docker stop <container-id>
+  ```
+
+---
+
+## Common docker / compose commands
+### Docker Debugging
+
+* Execute command in container
+  ```bash
+  docker exec -it <container-id> /bin/bash
+  ```
+* View container details
+  ```bash
+  docker inspect <container-id>
+  ```
+* View logs
+  ```bash
+  docker logs <container-id>
+  ```
+
+---
+
+## Common docker / compose commands
+### Compose Basic
+
+* Start services
+  ```bash
+  docker compose up
+  ```
+* Start in background
+  ```bash
+  docker compose up -d
+  ```
+* Stop services
+  ```bash
+  docker compose down
+  ```
+
+---
+
+## Common docker / compose commands
+### Compose Development
+
+* Rebuild images
+  ```bash
+  docker compose build
+  ```
+* Restart services
+  ```bash
+  docker compose restart
+  ```
+* View service status
+  ```bash
+  docker compose ps
+  ```
+
+---
+
+## Common docker / compose commands
+### Compose Debugging
+
+* Execute command in service
+  ```bash
+  docker compose exec web /bin/bash
+  ```
+* View service logs
+  ```bash
+  docker compose logs web
+  ```
+* Follow logs
+  ```bash
+  docker compose logs -f
+  ```
+
+## Final Exercise: Dockerize a Web App
+
+We have a simple web application in `exercises/2_express`:
+* Express backend (`/backend`)
+* Simple HTML frontend (`/frontend`)
+
+Your challenge:
+Write Dockerfiles for both services!
+
+---
+
+## Final Exercise: Requirements
+
+* Create a Dockerfile for the backend
+* Create a Dockerfile for the frontend
+* Backend should run on port 3000
+* Frontend should be served by a web server
+* Both should be accessible in browser
+
+---
+
+## Final Exercise: Requirements
+
+Hints:
+* Check the `exercises/2_express` folder for the code
+* Remember to install dependencies `RUN npm ...`
+* Think about port exposure
 

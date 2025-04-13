@@ -16,10 +16,10 @@ RUN apk add --no-cache ca-certificates
 # Copy the slides binary from builder
 COPY --from=builder /go/bin/slides /usr/local/bin/slides
 
-# Create a directory for presentations
-WORKDIR /presentations
+# Create a directory for slides
+WORKDIR /slides
 
-COPY *.md /presentations/presentation.md
+COPY ./slides/*.md /slides/presentation.md
 
 # Set the entrypoint to slides
 ENTRYPOINT ["slides"]
