@@ -1,3 +1,8 @@
+---
+author: Johannes Hörmann <me@aligator.dev>
+date: DD.MM.YYYY
+---
+
 # Docker Level 1
 
 * Brief introduction
