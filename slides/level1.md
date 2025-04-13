@@ -473,6 +473,8 @@ services:
   docker compose logs -f
   ```
 
+---
+
 ## Final Exercise: Dockerize a Web App
 
 We have a simple web application in `slides/exercises/2_express`:
