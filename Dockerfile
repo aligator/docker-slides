@@ -19,7 +19,7 @@ COPY --from=builder /go/bin/slides /usr/local/bin/slides
 # Create a directory for slides
 WORKDIR /slides
 
-COPY ./slides/*.md /slides/presentation.md
+COPY ./slides/*.md /slides
 
 # Set the entrypoint to slides
 ENTRYPOINT ["slides"]
