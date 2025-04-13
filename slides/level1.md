@@ -28,6 +28,32 @@
 
 ---
 
+## What is Docker?
+### Question:
+**The real advantage compared to a lightweight VM**
+
+* VMs allocate fixed resources:
+  * RAM is reserved even when idle
+  * Disk space is pre-allocated
+  * Each VM needs its own full OS kernel
+
+---
+
+## What is Docker?
+### Question:
+**The real advantage compared to a lightweight VM**
+
+* Docker containers:
+  * Share the host's linux kernel
+  * Use resources dynamically
+  * Only consume what they actually need
+  * Start in seconds (vs minutes for VMs)
+  * Much smaller disk footprint (if you clean up your no longer needed images / volumes :-)
+  * Lower memory overhead
+
+You can see containers as processes with `htop` because they are just isolated processes on the host system.
+---
+
 ## Hello World
 
 ```bash
