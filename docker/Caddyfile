@@ -1,0 +1,14 @@
+:13372
+
+@repo {
+	path /docker-slides.git*
+}
+
+cgi @repo /usr/libexec/git-core/git-http-backend {
+	env GIT_PROJECT_ROOT=/repos
+	env GIT_HTTP_EXPORT_ALL=1
+	env REMOTE_USER=anonymous
+	env PATH_INFO={http.request.uri.path}
+	env QUERY_STRING={http.request.uri.query}
+	env PATH_TRANSLATED=/repos{http.request.uri.path}
+}

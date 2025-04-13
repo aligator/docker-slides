@@ -37,14 +37,28 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push
+      - name: Build and push slides image
         uses: docker/build-push-action@v5
         with:
           context: .
+          file: docker/slides.Dockerfile
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.SHORT_SHA }}
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.ref_name }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/slides:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/slides:${{ env.SHORT_SHA }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/slides:${{ github.ref_name }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Build and push source image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: docker/source.Dockerfile
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/source:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/source:${{ env.SHORT_SHA }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/source:${{ github.ref_name }}
           cache-from: type=gha
           cache-to: type=gha,mode=max

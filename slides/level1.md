@@ -10,6 +10,15 @@
 
 ---
 
+## Fetch exercise sources
+
+To do the exercises you need to fetch the sources:
+```bash
+git clone http://aligator.dev:13372/docker-slides.git
+```
+
+---
+
 ## What is Docker?
 
 - Platform for containerized applications
@@ -461,7 +470,7 @@ services:
 
 ## Final Exercise: Dockerize a Web App
 
-We have a simple web application in `exercises/2_express`:
+We have a simple web application in `slides/exercises/2_express`:
 * Express backend (`/backend`)
 * Simple HTML frontend (`/frontend`)
 
@@ -483,7 +492,7 @@ Write Dockerfiles for both services!
 ## Final Exercise: Requirements
 
 Hints:
-* Check the `exercises/2_express` folder for the code
+* Check the `slides/exercises/2_express` folder for the code
 * Remember to install dependencies `RUN npm ...`
 * Think about port exposure
 

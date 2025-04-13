@@ -1,0 +1,7 @@
+.git
+.github
+.dockerignore
+docker
+!docker/slides.Dockerfile
+!docker/Caddyfile
+compose.yaml

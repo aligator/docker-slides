@@ -1,0 +1,17 @@
+services:
+  source:
+    build:
+      context: .
+      dockerfile: ./docker/source.Dockerfile
+    pull_policy: build
+    ports:
+      - 13372:13372
+
+  level1:
+    build:
+      context: .
+      dockerfile: ./docker/slides.Dockerfile
+    pull_policy: build
+    command: [ "serve", "level1.md" ]
+    ports:
+      - 13371:53531
