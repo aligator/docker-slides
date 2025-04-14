@@ -19,7 +19,9 @@ date: DD.MM.YYYY
 
 To do the exercises you need to fetch the sources:
 ```bash
-git clone http://aligator.dev:13372/docker-slides.git
+~~~sh
+echo git clone ${SLIDE_PROTOCOL:-http}://${SLIDE_HOST:-localhost}:${SLIDE_PORT:-13372}/docker-slides.git
+~~~
 ```
 
 ---

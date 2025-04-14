@@ -20,19 +20,14 @@ RUN apk add --no-cache git git-daemon
 COPY --from=builder /usr/local/bin/caddy /usr/bin/caddy
 
 COPY . /srv/app
-RUN mv /srv/app/docker/Caddyfile /etc/caddy/Caddyfile
+RUN mv /srv/app/docker/Caddyfile /etc/caddy/Caddyfile \
+    && mv /srv/app/docker/source-entrypoint.sh / \
+    && mv /srv/app/run.sh /run-original.sh
 
 WORKDIR /srv
 
-RUN mkdir /repos \
-    && git init --bare /repos/docker-slides.git \
-    && touch /repos/docker-slides.git/git-daemon-export-ok \
-    && cd app \
-    && git init \
-    && git config user.email "me@aligator.dev" \
-    && git config user.name "aligator" \
-    && git add . \
-    && git commit -m "Initial containerized commit" \
-    && git push --force /repos/docker-slides.git master \
-    && rm -rf .git
-
+ENV SLIDE_PROTOCOL=http
+ENV SLIDE_HOST=localhost
+ENV SLIDE_PORT=13372
+ENTRYPOINT [ "/source-entrypoint.sh" ]
+CMD [ "caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile" ]

@@ -12,6 +12,11 @@ services:
       context: .
       dockerfile: ./docker/slides.Dockerfile
     pull_policy: build
-    command: [ "serve", "level1.md" ]
+    command: [ "level1.md" ]
+    volumes:
+      - keys:/keys
     ports:
       - 13371:53531
+
+volumes:
+  keys:

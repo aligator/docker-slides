@@ -19,10 +19,10 @@ COPY --from=builder /go/bin/slides /usr/local/bin/slides
 # Create a directory for slides
 WORKDIR /slides
 
-COPY ./slides/*.md /slides
+COPY --chmod=777 ./slides/*.md /slides
 
 # Set the entrypoint to slides
-ENTRYPOINT ["slides"]
+ENTRYPOINT ["slides", "serve", "--keyPath", "/keys/slides", "--host", "0.0.0.0"]
 
 # Default command (can be overridden)
 CMD ["level1.md"] 
