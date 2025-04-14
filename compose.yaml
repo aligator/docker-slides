@@ -4,6 +4,7 @@ services:
       context: .
       dockerfile: ./docker/source.Dockerfile
     pull_policy: build
+    restart: on-failure
     ports:
       - 13372:13372
 
@@ -12,6 +13,7 @@ services:
       context: .
       dockerfile: ./docker/slides.Dockerfile
     pull_policy: build
+    restart: on-failure
     command: [ "level1.md" ]
     volumes:
       - keys:/keys
