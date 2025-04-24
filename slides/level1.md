@@ -252,7 +252,7 @@ docker run -p 3000:3000 my-server
   * Shell form: `ENTRYPOINT node`
   * Exec form: `ENTRYPOINT ["node"]`
 - Prefer exec form
-
+-  [Deeper explanation](https://dominikbraun.io/blog/docker/dockerfile-run-vs-cmd-vs-entrypoint/)
 ---
 
 ## First Dockerfile
@@ -265,7 +265,7 @@ docker run -p 3000:3000 my-server
   * Shell form: `CMD server.js`
   * Exec form: `CMD ["server.js"]`
 - Prefer exec form
-
+-  [Deeper explanation](https://dominikbraun.io/blog/docker/dockerfile-run-vs-cmd-vs-entrypoint/)
 ---
 
 ## First Compose File
@@ -503,5 +503,10 @@ Write Dockerfiles for both services!
 Hints:
 * Check the `slides/exercises/2_express` folder for the code
 * Remember to install dependencies `RUN npm ...`
+  * -> yes, here you want to use the shell-syntax 
+  as you may want to use shell features here!
 * Think about port exposure
 
+---
+
+# Thank you for your attention!

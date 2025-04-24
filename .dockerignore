@@ -6,3 +6,4 @@ docker
 !docker/Caddyfile
 !docker/source-entrypoint.sh
 compose.yaml
+node_modules
