@@ -8,12 +8,6 @@ date: DD.MM.YYYY
 * Simple full stack app
 * Simple Dockerfile
 * Best Practices
-  * Group / split commands
-  * Use pinned versions
-  * Avoid too many sequential RUN
-  * Multi Stage
-  * Secrets
-  * Small images
 * Special knowledge
 * Alpine
 
@@ -176,6 +170,46 @@ To avoid bloating the target / dev systems:
   * e.g. alpine, scratch, debian slim, ...
   * However all of them have some catch!
 
+---
+
+## Best practice
+### Health Checks
+* Add `HEALTHCHECK` to your Dockerfile
+* Helps container orchestrators know if your container is healthy
+* Example:
+```dockerfile
+HEALTHCHECK --interval=30s --timeout=3s \
+  CMD curl -f http://localhost/ || exit 1
+```
+
+---
+
+## Best practice
+### Non-root Users
+* Don't run containers as root
+* Create and use non-root user
+* Example:
+```dockerfile
+RUN adduser -D appuser
+USER appuser
+```
+
+---
+
+## Best practice
+### .dockerignore
+* Exclude unnecessary files from build context
+* Improves build performance
+* Example:
+```
+node_modules
+.git
+.env
+*.log
+```
+
+---
+
 # Special Docker Knowledge
 
 ---
@@ -232,38 +266,37 @@ To avoid bloating the target / dev systems:
 * **DIFFERENT SYNTAX** 
   https://zzz.buzz/2018/05/23/differences-of-rules-between-gitignore-and-dockerignore/
 
-## Best practice
-### Health Checks
-* Add `HEALTHCHECK` to your Dockerfile
-* Helps container orchestrators know if your container is healthy
-* Example:
-```dockerfile
-HEALTHCHECK --interval=30s --timeout=3s \
-  CMD curl -f http://localhost/ || exit 1
-```
+---
+
+## Alpine
+
+* Alpine uses musl libc instead of glibc
+  * Some applications might not work with musl
+  * Some pre-compiled binaries might not work
+* Smaller package repository
+  * Some packages might not be available
+  * Package versions might be older
 
 ---
 
-## Best practice
-### Non-root Users
-* Don't run containers as root
-* Create and use non-root user
-* Example:
-```dockerfile
-RUN adduser -D appuser
-USER appuser
-```
+## Alpine
+
+* Debugging can be harder
+  * Less tools available by default
+  * No bash by default
+  * Different behavior in some cases (e.g. sorting behavior for databases)
+
+-> in some cases these differences may not matter at all (e.g simple webserver)
+
+-> in other cases it may be more easy to use debian slim instead
 
 ---
 
-## Best practice
-### .dockerignore
-* Exclude unnecessary files from build context
-* Improves build performance
-* Example:
-```
-node_modules
-.git
-.env
-*.log
-```
+# Thank you for your attention!
+
+## Stay tuned for Level 3!
+
+## You may want to take a look at Level 1!
+~~~sh
+echo "\`ssh ${SLIDE1_HOST:-localhost} -p${SLIDE1_PORT:-13371}\`"
+~~~
