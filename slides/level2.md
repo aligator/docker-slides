@@ -230,3 +230,39 @@ To avoid bloating the target / dev systems:
   * Build optimization vs version control
 * **DIFFERENT SYNTAX** 
   https://zzz.buzz/2018/05/23/differences-of-rules-between-gitignore-and-dockerignore/
+
+## Best practice
+### Health Checks
+* Add `HEALTHCHECK` to your Dockerfile
+* Helps container orchestrators know if your container is healthy
+* Example:
+```dockerfile
+HEALTHCHECK --interval=30s --timeout=3s \
+  CMD curl -f http://localhost/ || exit 1
+```
+
+---
+
+## Best practice
+### Non-root Users
+* Don't run containers as root
+* Create and use non-root user
+* Example:
+```dockerfile
+RUN adduser -D appuser
+USER appuser
+```
+
+---
+
+## Best practice
+### .dockerignore
+* Exclude unnecessary files from build context
+* Improves build performance
+* Example:
+```
+node_modules
+.git
+.env
+*.log
+```
