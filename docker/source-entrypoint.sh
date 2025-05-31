@@ -1,9 +1,9 @@
 #!/usr/bin/env sh
 
 cp /run-original.sh /srv/app/run.sh
-sed -i "s/\${SLIDE_PROTOCOL}/${SLIDE_PROTOCOL}/g" /srv/app/run.sh
-sed -i "s/\${SLIDE_HOST}/${SLIDE_HOST}/g" /srv/app/run.sh
-sed -i "s/\${SLIDE_PORT}/${SLIDE_PORT}/g" /srv/app/run.sh 
+sed -i "s/\${SOURCE_PROTOCOL}/${SOURCE_PROTOCOL}/g" /srv/app/run.sh
+sed -i "s/\${SOURCE_HOST}/${SOURCE_HOST}/g" /srv/app/run.sh
+sed -i "s/\${SOURCE_PORT}/${SOURCE_PORT}/g" /srv/app/run.sh 
 
 
 rm -rf /repos

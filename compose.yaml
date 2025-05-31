@@ -15,6 +15,14 @@ services:
     pull_policy: build
     restart: on-failure
     command: ["level1.md"]
+    environment:
+      - SOURCE_PROTOCOL=http
+      - SOURCE_HOST=localhost
+      - SOURCE_PORT=13372
+      - SLIDE1_HOST=localhost
+      - SLIDE1_PORT=13371
+      - SLIDE2_HOST=localhost
+      - SLIDE2_PORT=13373
     volumes:
       - keys:/keys
     ports:
@@ -27,10 +35,18 @@ services:
     pull_policy: build
     restart: on-failure
     command: ["level2.md"]
+    environment:
+      - SOURCE_PROTOCOL=http
+      - SOURCE_HOST=localhost
+      - SOURCE_PORT=13372
+      - SLIDE1_HOST=localhost
+      - SLIDE1_PORT=13371
+      - SLIDE2_HOST=localhost
+      - SLIDE2_PORT=13373
     volumes:
       - keys:/keys
     ports:
-      - 13372:53531
+      - 13373:53531
 
 volumes:
   keys:

@@ -26,8 +26,8 @@ RUN mv /srv/app/docker/Caddyfile /etc/caddy/Caddyfile \
 
 WORKDIR /srv
 
-ENV SLIDE_PROTOCOL=http
-ENV SLIDE_HOST=localhost
-ENV SLIDE_PORT=13372
+ENV SOURCE_PROTOCOL=http
+ENV SOURCE_HOST=localhost
+ENV SOURCE_PORT=13372
 ENTRYPOINT [ "/source-entrypoint.sh" ]
 CMD [ "caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile" ]
