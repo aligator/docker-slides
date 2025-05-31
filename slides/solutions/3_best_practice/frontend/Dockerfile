@@ -11,13 +11,6 @@ COPY . .
 RUN npm run build
 
 # Production stage
-FROM node:20-slim
-WORKDIR /app
-
-# Copy only necessary files from builder
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/package*.json ./
-RUN npm ci --only=production
-
+FROM nginx:stable-alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
 EXPOSE 80
-ENTRYPOINT ["npm", "run", "preview"]
