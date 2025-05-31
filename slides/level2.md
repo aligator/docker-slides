@@ -23,7 +23,7 @@ date: DD.MM.YYYY
 
 ### Refresher:
 ~~~sh
-echo "(See level 1: \`ssh ${SLIDE1_HOST:-localhost} -p${SLIDE1_PORT:-13372}\`)"
+echo "(See level 1: \`ssh ${SLIDE1_HOST:-localhost} -p${SLIDE1_PORT:-13371}\`)"
 ~~~
 
 - Platform for containerized applications
@@ -38,8 +38,9 @@ Clone the repo
 ~~~sh
 echo git clone ${SOURCE_PROTOCOL:-http}://${SOURCE_HOST:-localhost}:${SOURCE_PORT:-13372}/docker-slides.git
 ~~~
-cd docker-slides/exercises/3_best_practice
+cd docker-slides/slides/exercises/3_best_practice
 cat frontend/Dockerfile
+cat backend/Dockerfile
 ```
 
 ---

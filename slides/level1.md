@@ -510,3 +510,8 @@ Hints:
 ---
 
 # Thank you for your attention!
+
+## You may continue with Level 2!
+~~~sh
+echo "\`ssh ${SLIDE2_HOST:-localhost} -p${SLIDE2_PORT:-13373}\`"
+~~~
