@@ -20,7 +20,7 @@ date: DD.MM.YYYY
 To do the exercises you need to fetch the sources:
 ```bash
 ~~~sh
-echo git clone ${SLIDE_PROTOCOL:-http}://${SLIDE_HOST:-localhost}:${SLIDE_PORT:-13372}/docker-slides.git
+echo git clone ${SOURCE_PROTOCOL:-http}://${SOURCE_HOST:-localhost}:${SOURCE_PORT:-13372}/docker-slides.git
 ~~~
 ```
 

@@ -14,11 +14,23 @@ services:
       dockerfile: ./docker/slides.Dockerfile
     pull_policy: build
     restart: on-failure
-    command: [ "level1.md" ]
+    command: ["level1.md"]
     volumes:
       - keys:/keys
     ports:
       - 13371:53531
+
+  level2:
+    build:
+      context: .
+      dockerfile: ./docker/slides.Dockerfile
+    pull_policy: build
+    restart: on-failure
+    command: ["level2.md"]
+    volumes:
+      - keys:/keys
+    ports:
+      - 13372:53531
 
 volumes:
   keys:
