@@ -135,7 +135,7 @@ EXPOSE 80
 Avoid `build` secrets to end up in the final stage.
 * Use `ARG` not `ENV` for build-only secrets
 * Avoid copying files to the final stage that have a secret
-* Use MultyStage builds to create a clean final stage
+* Use MultiStage builds to create a clean final stage
 * Best: use `--secret ` flag
 
 ---
@@ -211,9 +211,6 @@ node_modules
 ---
 
 # Special Docker Knowledge
-
----
-
 ## COPY vs ADD
 
 * `COPY` is simpler and more explicit
@@ -224,6 +221,7 @@ node_modules
 
 ---
 
+# Special Docker Knowledge
 ## ENTRYPOINT vs CMD
 
 * `ENTRYPOINT`: Defines the executable
@@ -235,6 +233,7 @@ node_modules
 
 ---
 
+# Special Docker Knowledge
 ## Shell vs Exec Form
 
 * Shell form: `CMD npm start`
@@ -248,6 +247,7 @@ node_modules
 
 ---
 
+# Special Docker Knowledge
 ## ARG vs ENV
 
 * `ARG`: Build-time variables
@@ -257,6 +257,7 @@ node_modules
 
 ---
 
+# Special Docker Knowledge
 ## .dockerignore vs .gitignore
 
 * `.dockerignore`: Excludes files from build context
@@ -268,7 +269,7 @@ node_modules
 
 ---
 
-## Alpine
+# Alpine
 
 * Alpine uses musl libc instead of glibc
   * Some applications might not work with musl
@@ -279,7 +280,7 @@ node_modules
 
 ---
 
-## Alpine
+# Alpine
 
 * Debugging can be harder
   * Less tools available by default
