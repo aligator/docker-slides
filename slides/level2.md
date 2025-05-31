@@ -76,7 +76,7 @@ yarn is complicated... based on the version you use maybe this:
 
 `yarn install --immutable --immutable-cache --check-cache`
 
-----
+---
 
 ## Best practice
 ### Avoid too many sequential RUN
